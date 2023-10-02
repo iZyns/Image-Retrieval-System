@@ -78,31 +78,29 @@ public class CBIR extends JFrame {
         gridLayout1 = new GridLayout(4, 5, 5, 5);
         gridLayout2 = new GridLayout(2, 1, 5, 5);
         gridLayout3 = new GridLayout(1, 2, 5, 5);
-        gridLayout4 = new GridLayout(1, 4, 100, 5);
-        setLayout(gridLayout2);
+        gridLayout4 = new GridLayout(1, 4, 50, 50);
+//        setLayout(gridLayout2);
         panelBottom1.setLayout(gridLayout1);
-//        panelBottom2.setLayout(gridLayout1);
-//        panelBottom3.setLayout(new FlowLayout());
+        panelBottom2.setLayout(gridLayout1);
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(panelTop, BorderLayout.NORTH);
         mainPanel.add(panelBottom1, BorderLayout.CENTER);
         mainPanel.add(panelBottom3, BorderLayout.SOUTH);
-        add(mainPanel);
+        mainPanel.setBackground(Color.black);
         photographLabel.setVerticalTextPosition(JLabel.BOTTOM);
         photographLabel.setHorizontalTextPosition(JLabel.CENTER);
         photographLabel.setHorizontalAlignment(JLabel.CENTER);
         photographLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         buttonPanel.setLayout(gridLayout4);
         panelTop.add(photographLabel);
-
         panelBottom3.add(buttonPanel);
         JButton previousPage = new JButton("Previous Page");
         JButton nextPage = new JButton("Next Page");
         JButton intensity = new JButton("Intensity");
         JButton colorCode = new JButton("Color Code");
-        buttonPanel.add(intensity);
-        buttonPanel.add(colorCode);
         buttonPanel.add(previousPage);
+        buttonPanel.add(colorCode);
+        buttonPanel.add(intensity);
         buttonPanel.add(nextPage);
 
         nextPage.addActionListener(new nextPageHandler());
@@ -112,6 +110,8 @@ public class CBIR extends JFrame {
         setSize(1100, 750);
         // this centers the frame on the screen
         setLocationRelativeTo(null);
+
+        add(mainPanel);
 
         button = new JButton[101];
         /*This for loop goes through the images in the database and stores them as icons and adds
