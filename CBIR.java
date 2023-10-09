@@ -79,7 +79,6 @@ public class CBIR extends JFrame {
         gridLayout2 = new GridLayout(2, 1, 5, 5);
         gridLayout3 = new GridLayout(1, 2, 5, 5);
         gridLayout4 = new GridLayout(1, 4, 50, 50);
-//        setLayout(gridLayout2);
         panelBottom1.setLayout(gridLayout1);
         panelBottom2.setLayout(gridLayout1);
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -129,8 +128,8 @@ public class CBIR extends JFrame {
             }
         }
 
-//        readIntensityFile();
-//        readColorCodeFile();
+        readIntensityFile();
+        readColorCodeFile();
         displayFirstPage();
     }
 
@@ -138,7 +137,6 @@ public class CBIR extends JFrame {
      * The contents of the matrix are processed and stored in a two dimensional array called intensityMatrix.
      */
     public void readIntensityFile() {
-        //System.out.println("Hello");
         StringTokenizer token;
         Scanner read;
         Double intensityBin;
@@ -296,11 +294,26 @@ public class CBIR extends JFrame {
             int pic = (picNo - 1);
             int picIntensity = 0;
             double picSize = imageSize[pic];
-
-            /////////////////////
-            ///your code///
-            /////////////////
-
+                for (int i = 0; i < imageCount; i++) {
+                    if (i != pic) {
+                        d = 0; //reset d
+                        for (int j = 0; j < 26; j++) {
+                            d += Math.abs((intensityMatrix[pic][j] / picSize) - (intensityMatrix[i][j] / imageSize[i]));
+                        }
+                        distance[i] = d;
+                    }
+                }
+                Arrays.sort(distance);
+            for (int i = 0; i < imageCount; i++) {
+                d = distance[i];
+                if (map.containsKey(d)) {
+                    map.get(d).add(i);
+                } else {
+                    LinkedList<Integer> list = new LinkedList<>();
+                    list.add(i);
+                    map.put(d, list);
+                }
+            }
         }
     }
         /*This class implements an ActionListener when the user selects the colorCode button.  The image number that the
